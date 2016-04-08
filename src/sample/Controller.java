@@ -27,16 +27,14 @@ public class Controller extends Frame {
 
     private TextArea setupTextArea() {
         TextArea textArea = new TextArea();
-        textArea.setBounds(25, 150, 450, 600);
+        textArea.setBounds(25, 150, 750, 600);
         return textArea;
     }
 
     private Button setupPrintButton() {
         Button b = new Button("Pretty print");
         b.setBounds(25, 100, 100, 25);
-        b.addActionListener(e -> {
-            textArea.setText(new LogFormatter(textField.getText()).prettyPrint());
-        });
+        b.addActionListener(e -> textArea.setText(new LogFormatter(textField.getText()).prettyPrint()));
         return b;
     }
 
@@ -54,7 +52,7 @@ public class Controller extends Frame {
             add(component);
         }
 
-        setSize(500, 800);
+        setSize(800, 800);
         setBackground(new Color(195, 195, 195));
         setLayout(null); //no layout manager
         setVisible(true);

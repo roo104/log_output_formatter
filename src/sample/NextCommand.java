@@ -22,7 +22,8 @@ public class NextCommand {
                 outputText = getTabString(tabIndex) + text.substring(0, index + 1);
                 break;
             case REVERSE_TAB:
-                outputText = getTabString(tabIndex--) + text.substring(0, index + 1);
+                int adjustedIndex = index == 0 ? index + 1 : index;
+                outputText = getTabString(tabIndex--) + text.substring(0, adjustedIndex);
                 break;
         }
         return outputText;
@@ -41,10 +42,25 @@ public class NextCommand {
     }
 
     public String getRemainingText(String text) {
-        return text.substring(index + 1);
+        String remainingText;
+        switch (command) {
+            case REVERSE_TAB:
+                int adjustedIndex = index == 0 ? index + 1 : index;
+                remainingText = text.substring(adjustedIndex);
+                break;
+            default:
+                remainingText = text.substring(index + 1);
+                break;
+
+        }
+        return remainingText.trim();
     }
 
     public int getNewTabIndex() {
         return tabIndex;
+    }
+
+    public Command getCommand() {
+        return command;
     }
 }

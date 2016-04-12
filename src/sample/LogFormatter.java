@@ -1,5 +1,8 @@
 package sample;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LogFormatter {
 
     private String text;
@@ -12,11 +15,17 @@ public class LogFormatter {
     public String prettyPrint() {
         int tabIndex = 0;
 
-        while (text.length() > 1) {
+        while (text.length() > 0) {
             NextCommand command = getNextCommand(text, tabIndex);
             finalText += command.getOutputText(text);
             text = command.getRemainingText(text);
             tabIndex = command.getNewTabIndex();
+
+            System.out.println("NextCmd:\t" + command.getCommand());
+            System.out.println("FinalText:\t" + finalText);
+            System.out.println("Text:\t\t" + text);
+            System.out.println("TabIndex:\t" + tabIndex);
+            System.out.println("==========================================================");
         }
 
         return finalText;
@@ -28,23 +37,22 @@ public class LogFormatter {
         int reverseTab = finalText.indexOf(Command.REVERSE_TAB.getC());
 
         Command cmd = null;
-        int index = tabIndex;
 
         int lowestValue = Integer.MAX_VALUE;
 
-        if (tabIndex > 0 && tabIndex < lowestValue) {
-            cmd = Command.TAB;
-            index = tabIndex;
-        } else if (noTabIndex > 0 && noTabIndex < lowestValue && noTabIndex < reverseTab) {
-            cmd = Command.NO_TAB;
-            index = noTabIndex;
-        } else if (reverseTab < lowestValue) {
-            cmd = Command.REVERSE_TAB;
-            index = reverseTab;
+        Map<Command, Integer> integers = new HashMap<>();
+        integers.put(Command.TAB, tabIndex);
+        integers.put(Command.NO_TAB, noTabIndex);
+        integers.put(Command.REVERSE_TAB, reverseTab);
+
+        for (Map.Entry<Command, Integer> entry : integers.entrySet()) {
+            if (entry.getValue() >= 0 && entry.getValue() < lowestValue) {
+                lowestValue = entry.getValue();
+                cmd = entry.getKey();
+            }
         }
 
-        return new NextCommand(cmd, index, currentIndex);
+        return new NextCommand(cmd, lowestValue, currentIndex);
     }
-
 
 }

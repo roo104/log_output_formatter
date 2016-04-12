@@ -12,17 +12,6 @@ public enum Command {
         this.c = c;
     }
 
-    public static Command fromChar(char c) {
-        Command value = null;
-        for (Command command : Command.values()) {
-            if (command.c == c) {
-                value = command;
-                break;
-            }
-        }
-        return value;
-    }
-
     public char getC() {
         return c;
     }

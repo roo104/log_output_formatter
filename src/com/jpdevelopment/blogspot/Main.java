@@ -1,4 +1,4 @@
-package sample;
+package com.jpdevelopment.blogspot;
 
 public class Main {
 

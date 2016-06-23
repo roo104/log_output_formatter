@@ -1,4 +1,4 @@
-package sample;
+package com.jpdevelopment.blogspot;
 
 import java.awt.*;
 import java.awt.event.WindowAdapter;
@@ -27,14 +27,14 @@ public class Controller extends Frame {
 
     private TextArea setupTextArea() {
         TextArea textArea = new TextArea();
-        textArea.setBounds(25, 150, 750, 600);
+        textArea.setBounds(25, 150, 750, 625);
         return textArea;
     }
 
     private Button setupPrintButton() {
         Button b = new Button("Pretty print");
         b.setBounds(25, 100, 100, 25);
-        b.addActionListener(e -> textArea.setText(new LogFormatter(textField.getText()).prettyPrint()));
+        b.addActionListener(e -> textArea.setText(new Parser(textField.getText()).print()));
         return b;
     }
 

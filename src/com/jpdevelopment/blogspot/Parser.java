@@ -21,7 +21,6 @@ public class Parser {
                 case "[":
                     sb.append(s);
                     sb.append("\n");
-                    sb.append(tabs(tabIndex));
                     tabIndex++;
                     break;
                 case "{":
@@ -33,9 +32,9 @@ public class Parser {
                     break;
                 case "]":
                     sb.append("\n");
-                    sb.append(s);
-                    sb.append(tabs(tabIndex));
                     tabIndex--;
+                    sb.append(tabs(tabIndex));
+                    sb.append(s);
                     break;
                 case "}":
                     sb.append("\n");

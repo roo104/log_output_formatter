@@ -65,5 +65,6 @@ public class Controller extends Frame {
         setBackground(new Color(195, 195, 195));
         setLayout(null); //no layout manager
         setVisible(true);
+        setTitle("Log Formatter");
     }
 }

@@ -7,18 +7,20 @@ import java.awt.event.WindowEvent;
 public class Controller extends Frame {
 
     private final TextArea textArea;
-    private final Button submitButton;
+    private final Button printButton;
+    private final Button printAsJsonButton;
     private final Button clearButton;
     private final TextField textField;
 
     public Controller() {
         textArea = setupTextArea();
-        submitButton = setupPrintButton();
+        printButton = setupPrintButton();
+        printAsJsonButton = setupPrintJsonButton();
         clearButton = setupClearButton();
         textField = setupInputTextField();
 
         setupCloseWindowEvent();
-        setupFrame(textArea, submitButton, clearButton, textField);
+        setupFrame(textArea, printButton, printAsJsonButton, clearButton, textField);
     }
 
     private TextField setupInputTextField() {
@@ -37,6 +39,13 @@ public class Controller extends Frame {
         Button b = new Button("Pretty print");
         b.setBounds(25, 100, 100, 25);
         b.addActionListener(e -> textArea.setText(new Parser(textField.getText()).print()));
+        return b;
+    }
+
+    private Button setupPrintJsonButton() {
+        Button b = new Button("Pretty print as JSON");
+        b.setBounds(175, 100, 125, 25);
+        b.addActionListener(e -> textArea.setText(new Parser(textField.getText()).printAsJson()));
         return b;
     }
 

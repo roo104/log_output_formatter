@@ -4,6 +4,7 @@ import java.util.StringTokenizer;
 
 public class Parser {
 
+    private static final String TOKENIZE_CHARS = "\\{\\}\\[\\]\\,";
     private final String text;
 
     public Parser(String text) {
@@ -19,7 +20,7 @@ public class Parser {
     }
 
     public String print() {
-        StringTokenizer tokenizer = new StringTokenizer(text, "\\{\\}\\[\\]\\,", true);
+        StringTokenizer tokenizer = new StringTokenizer(text, TOKENIZE_CHARS, true);
         StringBuilder sb = new StringBuilder();
         int tabIndex = 0;
 
@@ -64,7 +65,7 @@ public class Parser {
     }
 
     public String printAsJson() {
-        StringTokenizer tokenizer = new StringTokenizer(text, "\\{\\}\\[\\]\\,", true);
+        StringTokenizer tokenizer = new StringTokenizer(text, TOKENIZE_CHARS, true);
         StringBuilder sb = new StringBuilder();
         int tabIndex = 0;
 
